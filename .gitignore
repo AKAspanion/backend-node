@@ -1,2 +1,15 @@
-# node_modules
-# public/uploads
+node_modules
+#public/uploads
+.env
+.eslintcache
+
+# mongo
+.data
+data
+
+# logs
+logs
+
+# build
+build
+dist
