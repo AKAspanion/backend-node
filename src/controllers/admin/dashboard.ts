@@ -3,8 +3,9 @@ import UserModel from '@models/user';
 import ProductModel from '@models/product';
 import CategoryModel from '@models/category';
 import Pagination from '@utils/pagination';
+import { BaseRequestHandler } from '../../types/common';
 
-export const dashboardData = async (req, res) => {
+export const dashboardData: BaseRequestHandler = async (req, res) => {
   try {
     // counts
     const ordersCount = await OrderModel.find().countDocuments();
@@ -27,7 +28,7 @@ export const dashboardData = async (req, res) => {
   }
 };
 
-export const getAllUsers = async (req, res) => {
+export const getAllUsers: BaseRequestHandler = async (req, res) => {
   try {
     // Search through email
     const { _search: searchQ } = req.query;

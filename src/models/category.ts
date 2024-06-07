@@ -13,4 +13,6 @@ const categorySchema = new Schema(
 
 const CategoryModel = model('category', categorySchema);
 
+export type CategoryType = InstanceType<typeof CategoryModel>;
+
 export default CategoryModel;

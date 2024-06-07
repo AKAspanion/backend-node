@@ -16,4 +16,4 @@ COPY . .
 EXPOSE 3000
 
 # Command to execute when the image is instantiated
-CMD ["yarn", "start"]
+CMD ["npm", "run", "start"]

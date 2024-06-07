@@ -20,7 +20,6 @@ export const seedProducts = async () => {
 
       logger.info('✅  Product seeding success!');
     } catch (error) {
-      console.log(error);
       logger.info('❌  Product seeding failure!');
     }
   }
@@ -41,7 +40,7 @@ const createProductModels = async (product: ProductType) => {
 
 const isProductsSeeded = async () => {
   try {
-    const item = products[0];
+    const item = products[products.length - 1];
     const product = await ProductModel.findOne({ title: item.title });
     if (product) {
       return true;

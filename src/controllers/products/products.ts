@@ -1,7 +1,8 @@
-import ProductModel from '@models/product';
+import ProductModel, { ProductType } from '@models/product';
 import Pagination from '@utils/pagination';
+import { BaseRequestHandler } from 'types/common';
 
-export const addProduct = async (req, res) => {
+export const addProduct: BaseRequestHandler<ProductType> = async (req, res) => {
   try {
     const { title, sku, price, quantity } = req.body;
 
@@ -21,7 +22,7 @@ export const addProduct = async (req, res) => {
   }
 };
 
-export const updateProduct = async (req, res) => {
+export const updateProduct: BaseRequestHandler<ProductType> = async (req, res) => {
   try {
     const { title, sku, price, image } = req.body;
     const { id } = req.params;
@@ -51,7 +52,7 @@ export const updateProduct = async (req, res) => {
   }
 };
 
-export const deleteProduct = async (req, res) => {
+export const deleteProduct: BaseRequestHandler = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -72,7 +73,7 @@ export const deleteProduct = async (req, res) => {
   }
 };
 
-export const getProduct = async (req, res) => {
+export const getProduct: BaseRequestHandler = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -94,7 +95,7 @@ export const getProduct = async (req, res) => {
   }
 };
 
-export const getAllProducts = async (req, res) => {
+export const getAllProducts: BaseRequestHandler = async (req, res) => {
   try {
     // Search through title names
     const { _search: searchQ } = req.query;
@@ -124,7 +125,7 @@ export const getAllProducts = async (req, res) => {
   }
 };
 
-export const getCategoryProducts = async (req, res) => {
+export const getCategoryProducts: BaseRequestHandler = async (req, res) => {
   try {
     // Search through title names
     const { _search: searchQ } = req.query;

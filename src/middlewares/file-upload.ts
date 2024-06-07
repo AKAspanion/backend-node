@@ -1,6 +1,7 @@
 import multer from 'multer';
+import { BaseMiddleWare } from 'types/common';
 
-export const uploadFile = async (req, res, next) => {
+export const uploadFile: BaseMiddleWare = async (req, res, next) => {
   try {
     const storage = multer.diskStorage({
       destination: function (req, file, cb) {

@@ -1,7 +1,8 @@
 import { ObjectId } from 'mongodb';
 import UserModel from '@models/user';
+import { WithAuthRequestHandler } from 'types/common';
 
-export const addProductToWishlist = async (req, res) => {
+export const addProductToWishlist: WithAuthRequestHandler = async (req, res) => {
   try {
     const { id: product } = req.params;
     const user = req.user;
@@ -24,7 +25,7 @@ export const addProductToWishlist = async (req, res) => {
   }
 };
 
-export const removeProductFromWishlist = async (req, res) => {
+export const removeProductFromWishlist: WithAuthRequestHandler = async (req, res) => {
   try {
     const { id: product } = req.params;
     const user = req.user;
@@ -47,7 +48,7 @@ export const removeProductFromWishlist = async (req, res) => {
   }
 };
 
-export const removeWishlistItem = async (req, res) => {
+export const removeWishlistItem: WithAuthRequestHandler = async (req, res) => {
   try {
     const { id: wishlistId } = req.params;
     const user = req.user;
@@ -70,7 +71,7 @@ export const removeWishlistItem = async (req, res) => {
   }
 };
 
-export const wishlist = async (req, res) => {
+export const wishlist: WithAuthRequestHandler = async (req, res) => {
   try {
     const user = req.user;
 

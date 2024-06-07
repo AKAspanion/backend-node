@@ -3,8 +3,18 @@ import jwt from 'jsonwebtoken';
 import { JWT_SECRET_KEY } from '@constants/app';
 
 import UserModel from '@models/user';
+import { WithAuthRequestMiddleware } from 'types/common';
 
-export const isAdmin = async (req, res, next) => {
+type TokenQuery = {
+  token: string;
+  id: string;
+};
+
+export const isAdmin: WithAuthRequestMiddleware<TokenQuery, TokenQuery> = async (
+  req,
+  res,
+  next,
+) => {
   // const { email } = req.body;
 
   const tokenInReq = getAuthToken(req.headers?.authorization);
@@ -15,7 +25,7 @@ export const isAdmin = async (req, res, next) => {
   if (token) {
     try {
       // decode token with TOKEN key to extract the user
-      const decoded = jwt.verify(token, JWT_SECRET_KEY);
+      const decoded = jwt.verify(token, JWT_SECRET_KEY) as jwt.JwtPayload;
 
       // saving the current user in req.user
       req.user = decoded;
@@ -42,7 +52,11 @@ export const isAdmin = async (req, res, next) => {
   }
 };
 
-export const checkAuth = async (req, res, next) => {
+export const checkAuth: WithAuthRequestMiddleware<TokenQuery, TokenQuery> = async (
+  req,
+  res,
+  next,
+) => {
   try {
     const tokenInReq = getAuthToken(req.headers?.authorization);
 
@@ -51,7 +65,7 @@ export const checkAuth = async (req, res, next) => {
 
     if (token) {
       try {
-        const decoded = jwt.verify(token, JWT_SECRET_KEY);
+        const decoded = jwt.verify(token, JWT_SECRET_KEY) as jwt.JwtPayload;
         req.user = decoded;
 
         // @ts-ignore
@@ -72,7 +86,11 @@ export const checkAuth = async (req, res, next) => {
   }
 };
 
-export const checkSameUser = async (req, res, next) => {
+export const checkSameUser: WithAuthRequestMiddleware<TokenQuery, TokenQuery> = async (
+  req,
+  res,
+  next,
+) => {
   try {
     const { id: idFromQuery } = req.query;
     const { id: idFromParams } = req.params;
@@ -83,7 +101,7 @@ export const checkSameUser = async (req, res, next) => {
 
     if (token) {
       try {
-        const decoded = jwt.verify(token, JWT_SECRET_KEY);
+        const decoded = jwt.verify(token, JWT_SECRET_KEY) as jwt.JwtPayload;
         req.user = decoded;
 
         // @ts-ignore
@@ -110,7 +128,11 @@ export const checkSameUser = async (req, res, next) => {
   }
 };
 
-export const checkSameUserOrAdmin = async (req, res, next) => {
+export const checkSameUserOrAdmin: WithAuthRequestMiddleware<TokenQuery, TokenQuery> = async (
+  req,
+  res,
+  next,
+) => {
   try {
     const { id: idFromQuery } = req.query;
     const { id: idFromParams } = req.params;
@@ -121,7 +143,7 @@ export const checkSameUserOrAdmin = async (req, res, next) => {
 
     if (token) {
       try {
-        const decoded = jwt.verify(token, JWT_SECRET_KEY);
+        const decoded = jwt.verify(token, JWT_SECRET_KEY) as jwt.JwtPayload;
         req.user = decoded;
 
         // @ts-ignore

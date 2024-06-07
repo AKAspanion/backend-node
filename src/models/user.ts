@@ -31,4 +31,6 @@ const userSchema = new Schema(
 
 const UserModel = model('user', userSchema);
 
+export type UserType = InstanceType<typeof UserModel>;
+
 export default UserModel;

@@ -1,6 +1,7 @@
 import OrderModel from '@models/order';
+import { WithAuthRequestHandler } from 'types/common';
 
-export const getOrders = async (req, res) => {
+export const getOrders: WithAuthRequestHandler = async (req, res) => {
   try {
     const user = req.user;
     const orders = await OrderModel.find({ user: user._id })
@@ -20,7 +21,7 @@ export const getOrders = async (req, res) => {
   }
 };
 
-export const getOrder = async (req, res) => {
+export const getOrder: WithAuthRequestHandler = async (req, res) => {
   try {
     const { id: orderId } = req.params;
     const user = req.user;

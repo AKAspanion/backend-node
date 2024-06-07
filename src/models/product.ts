@@ -16,4 +16,6 @@ const productSchema = new Schema(
 
 const ProductModel = model('product', productSchema);
 
+export type ProductType = InstanceType<typeof ProductModel>;
+
 export default ProductModel;

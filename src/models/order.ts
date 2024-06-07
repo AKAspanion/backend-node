@@ -35,4 +35,6 @@ const orderSchema = new Schema(
 
 const OrderModel = model('order', orderSchema);
 
+export type OrderType = InstanceType<typeof OrderModel>;
+
 export default OrderModel;

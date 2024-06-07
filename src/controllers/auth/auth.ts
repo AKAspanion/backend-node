@@ -1,14 +1,15 @@
-import UserModel from '@models/user';
+import UserModel, { UserType } from '@models/user';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET_KEY } from '@constants/app';
+import { BaseBody, BaseQuery, BaseRequestHandler } from 'types/common';
 
-function generateAuthToken(data) {
+function generateAuthToken(data: object) {
   const token = jwt.sign(data, JWT_SECRET_KEY, { expiresIn: '10h' });
   return token;
 }
 
-export const login = async (req, res) => {
+export const login: BaseRequestHandler<UserType> = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await UserModel.findOne({ email });
@@ -41,7 +42,7 @@ export const login = async (req, res) => {
   }
 };
 
-export const register = async (req, res) => {
+export const register: BaseRequestHandler<UserType> = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -67,7 +68,10 @@ export const register = async (req, res) => {
   }
 };
 
-export const updateUser = async (req, res) => {
+export const updateUser: BaseRequestHandler<UserType, BaseQuery & { id: string }> = async (
+  req,
+  res,
+) => {
   try {
     const { name } = req.body;
 
@@ -95,7 +99,10 @@ export const updateUser = async (req, res) => {
   }
 };
 
-export const deleteUser = async (req, res) => {
+export const deleteUser: BaseRequestHandler<BaseBody, BaseQuery & { id: string }> = async (
+  req,
+  res,
+) => {
   try {
     const { id: idQuery } = req.query;
     const { id: idParams } = req.params;
@@ -115,7 +122,10 @@ export const deleteUser = async (req, res) => {
   }
 };
 
-export const userById = async (req, res) => {
+export const userById: BaseRequestHandler<BaseBody, BaseQuery & { id: string }> = async (
+  req,
+  res,
+) => {
   try {
     const { id: idQuery } = req.query;
     const { id: idParams } = req.params;
@@ -134,7 +144,12 @@ export const userById = async (req, res) => {
   }
 };
 
-export const resetPassword = async (req, res) => {
+type ResetPasswordBody = { password: string; newPassword: string };
+
+export const resetPassword: BaseRequestHandler<
+  ResetPasswordBody,
+  BaseQuery & { id: string }
+> = async (req, res) => {
   try {
     const { password, newPassword } = req.body;
     const { id } = req.query;

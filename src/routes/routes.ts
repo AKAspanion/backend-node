@@ -1,4 +1,4 @@
-import { RouterMap } from '../@types/common';
+import { RouterMap } from '../types/common';
 
 import appRouter from './app';
 import authRouter from './auth/auth';

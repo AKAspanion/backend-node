@@ -1,6 +1,6 @@
-import { AppMiddleware } from '../@types/common';
+import { BaseMiddleWare } from '../types/common';
 
-const apiRules: AppMiddleware = (req, res, next) => {
+const apiRules: BaseMiddleWare = (req, res, next) => {
   res.header('Access-Control-Allow-Origin', req.header('origin'));
   res.header(
     'Access-Control-Allow-Headers',

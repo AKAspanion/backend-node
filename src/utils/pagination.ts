@@ -1,3 +1,5 @@
+import { BaseQuery } from 'types/common';
+
 class Pagination {
   limit: number | null;
   skip: number | null;
@@ -10,7 +12,7 @@ class Pagination {
    * _order - order of sort "asc" | "desc"
    * @param query request query object
    */
-  constructor(query: Record<string, string>) {
+  constructor(query: BaseQuery) {
     this.limit = query._limit ? parseInt(query._limit) : null;
     this.skip = query._page && this.limit ? (parseInt(query._page) - 1) * this.limit : null;
     this.sort = {};

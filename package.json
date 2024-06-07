@@ -5,6 +5,7 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
+    "type-check": "tsc",
     "start": "tsx watch src/app",
     "format": "prettier --write ./src",
     "lint": "eslint --fix --cache ./src",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.4.0",
+    "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.17",
     "@types/eslint__js": "^8.42.3",
     "@types/express": "^4.17.21",
@@ -51,6 +53,5 @@
   },
   "engines": {
     "node": ">20.0.0"
-  },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  }
 }

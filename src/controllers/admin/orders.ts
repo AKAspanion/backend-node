@@ -1,7 +1,8 @@
 import OrdersModel from '@models/order';
 import { getCurrentDate } from '@utils/date';
+import { BaseRequestHandler } from 'types/common';
 
-export const getAllOrders = async (req, res) => {
+export const getAllOrders: BaseRequestHandler = async (req, res) => {
   try {
     const orders = await OrdersModel.find()
       .populate({
@@ -23,7 +24,10 @@ export const getAllOrders = async (req, res) => {
   }
 };
 
-export const changeStatusOfOrder = async (req, res) => {
+export const changeStatusOfOrder: BaseRequestHandler<{ status: string; id: string }> = async (
+  req,
+  res,
+) => {
   try {
     const { status, id } = req.body;
 

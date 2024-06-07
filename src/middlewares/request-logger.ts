@@ -1,7 +1,7 @@
-import { AppMiddleware } from '../@types/common';
+import { BaseMiddleWare } from '../types/common';
 import { accessLogger } from '@utils/logger';
 
-const requestLogger: AppMiddleware = (req, res, next) => {
+const requestLogger: BaseMiddleWare = (req, res, next) => {
   accessLogger.info(
     `[${req.method}] [${req.path}] [${req.socket.remoteAddress}] [${JSON.stringify(req.body ?? req.query ?? {})}]`,
   );

@@ -1,10 +1,11 @@
 import { ObjectId } from 'mongodb';
-import OrderModel from '@models/order';
+import OrderModel, { OrderType } from '@models/order';
 import ProductModel from '@models/product';
 import UserModel from '@models/user';
 import { extractValidationMessage } from '@utils/mongoose';
+import { WithAuthRequestHandler } from 'types/common';
 
-export const checkout = async (req, res) => {
+export const checkout: WithAuthRequestHandler<OrderType> = async (req, res) => {
   try {
     const body = req.body;
     const user = req.user;
@@ -27,7 +28,7 @@ export const checkout = async (req, res) => {
       const items = body?.items;
 
       const promises = items.map((item) =>
-        ProductModel.findOneAndUpdate({ _id: ObjectId.createFromHexString(item.product) }, [
+        ProductModel.findOneAndUpdate({ _id: item.product }, [
           {
             $set: {
               quantity: {
@@ -56,7 +57,7 @@ export const checkout = async (req, res) => {
   }
 };
 
-export const addProductToCart = async (req, res) => {
+export const addProductToCart: WithAuthRequestHandler<{ quantity: number }> = async (req, res) => {
   try {
     const { id: product } = req.params;
     const { quantity } = req.body;
@@ -87,7 +88,7 @@ export const addProductToCart = async (req, res) => {
   }
 };
 
-export const removeProductFromCart = async (req, res) => {
+export const removeProductFromCart: WithAuthRequestHandler = async (req, res) => {
   try {
     const { id: product } = req.params;
     const user = req.user;
@@ -110,7 +111,7 @@ export const removeProductFromCart = async (req, res) => {
   }
 };
 
-export const removeCartItem = async (req, res) => {
+export const removeCartItem: WithAuthRequestHandler = async (req, res) => {
   try {
     const { id: cartId } = req.params;
     const user = req.user;
@@ -133,7 +134,7 @@ export const removeCartItem = async (req, res) => {
   }
 };
 
-export const updateCartItem = async (req, res) => {
+export const updateCartItem: WithAuthRequestHandler<{ quantity: number }> = async (req, res) => {
   try {
     const { id: cartId } = req.params;
     const { quantity } = req.body;
@@ -159,7 +160,7 @@ export const updateCartItem = async (req, res) => {
   }
 };
 
-export const cart = async (req, res) => {
+export const cart: WithAuthRequestHandler = async (req, res) => {
   try {
     const user = req.user;
 

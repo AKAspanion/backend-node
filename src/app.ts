@@ -5,6 +5,7 @@ import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
+import '@config/env';
 import db from '@config/database';
 import { routes } from '@routes/routes';
 import { APP_PORT, IS_DEV } from '@constants/app';
@@ -41,7 +42,7 @@ const main = async () => {
   app.listen(APP_PORT, () => {
     if (IS_DEV) {
       console.log(``);
-      logger.info(`Example Node Express server ready`);
+      logger.info(`Node Express server ready`);
       logger.info(`➜  Server: http://localhost:${APP_PORT}`);
     }
   });

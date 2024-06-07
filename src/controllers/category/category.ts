@@ -1,8 +1,9 @@
 import CategoryModel from '@models/category';
 import { extractValidationMessage } from '@utils/mongoose';
 import Pagination from '@utils/pagination';
+import { BaseRequestHandler } from 'types/common';
 
-export const addCategory = async (req, res) => {
+export const addCategory: BaseRequestHandler = async (req, res) => {
   try {
     const category = new CategoryModel(req.body);
     const validation = category.validateSync();
@@ -24,7 +25,7 @@ export const addCategory = async (req, res) => {
   }
 };
 
-export const getAllCategories = async (req, res) => {
+export const getAllCategories: BaseRequestHandler = async (req, res) => {
   try {
     // Search through title
     const { _search: searchQ } = req.query;
@@ -51,7 +52,7 @@ export const getAllCategories = async (req, res) => {
   }
 };
 
-export const updateCategory = async (req, res) => {
+export const updateCategory: BaseRequestHandler = async (req, res) => {
   try {
     // const { title, description, image } = req.body;
     const { id } = req.params;
@@ -80,7 +81,7 @@ export const updateCategory = async (req, res) => {
   }
 };
 
-export const deleteCategory = async (req, res) => {
+export const deleteCategory: BaseRequestHandler = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -100,7 +101,7 @@ export const deleteCategory = async (req, res) => {
     return res.status(500).send({ err: error.message });
   }
 };
-export const getCategory = async (req, res) => {
+export const getCategory: BaseRequestHandler = async (req, res) => {
   try {
     const { id } = req.params;
 
